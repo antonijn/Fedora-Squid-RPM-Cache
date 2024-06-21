@@ -1,5 +1,4 @@
 #!/bin/bash
-
 set -eo pipefail
 
 source /etc/os-release
@@ -11,5 +10,5 @@ basearch=$(uname -m)
 	| grep 'http://.*\(releases\|updates\)/[0-9]\+/Everything' \
 	| sed 's@.*>\([^<]*/\)\(releases\|updates\)/[0-9]\+/Everything.*$@\1@' \
 	| sed 's/[]\/$*.^[]/\\&/g' \
-	| awk '{ print $0 "(.*\\.rpm)\thttp://fedora.mirrors.squid.internal/$1"; }' \
+	| awk '{ print "^" $0 "(.*\\.rpm)$\thttp://fedora.mirrors.squid.internal/$1"; }' \
 	| sort -u
