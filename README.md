@@ -9,3 +9,11 @@ creating the database. This does that (for Fedora).
 ```
 $ ./squid-gen-db.sh > fedora.db
 ```
+
+For mirrors which mirror stuff other than `$(uname -m)`:
+
+```
+$ for ARCH in x86_64 aarch64; do
+>   ARCH=$ARCH ./squid-gen-db.sh
+> done | sort -u > fedora.db
+```

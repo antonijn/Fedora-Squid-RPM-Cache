@@ -8,7 +8,8 @@ set -eo pipefail
 #   ID=fedora
 #
 # The VERSION_ID doesn't matter so much, since we strip it away later
-# anyway. Its only relevance is that no all mirrors mirror all versions.
+# anyway. Its only relevance is that not all mirrors mirror all
+# versions.
 #
 # TODO make VERSION_ID and ID overridable via cmd line
 #
@@ -17,10 +18,9 @@ source /etc/os-release
 #
 # Similar to VERSION_ID, this really doesn't matter very much.
 #
-basearch=$(uname -m)
+basearch=${ARCH:-$(uname -m)}
 
-# TODO make URL overridable via cmd line
-meta_url="https://mirrors.fedoraproject.org/metalink"
+meta_url=${METALINK:-https://mirrors.fedoraproject.org/metalink}
 map_url="http://${ID}.mirrors.squid.internal"
 
 # We presume Squid will only be used to cache plain HTTP downloads, not
