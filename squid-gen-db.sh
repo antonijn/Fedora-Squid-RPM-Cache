@@ -44,9 +44,9 @@ meta_url="${meta_url}&arch=${basearch}"
 # In July 2024 on Fedora 40 x86_64, the final output has 165 entries.
 #
 ( curl -sS "${meta_url}&repo=fedora-${VERSION_ID}";
-  curl -sS "${meta_url}&repo=updates-released-f${VERSION_ID}" ) \
-	| grep 'http://.*\(releases\|updates\)/[0-9]\+/Everything' \
+  curl -sS "${meta_url}&repo=updates-released-f${VERSION_ID}" )                \
+	| grep 'http://.*\(releases\|updates\)/[0-9]\+/Everything'             \
 	| sed 's@.*>\([^<]*/\)\(releases\|updates\)/[0-9]\+/Everything.*$@\1@' \
-	| sed 's/[]\/$*.^[]/\\&/g' \
-	| awk "{ print \"^\" \$0 \"(.*\\\\.rpm)$\\t${map_url}/\$1\"; }" \
+	| sed 's/[]\/$*.^[]/\\&/g'                                             \
+	| awk "{ print \"^\" \$0 \"(.*\\\\.rpm)$\\t${map_url}/\$1\"; }"        \
 	| sort -u
